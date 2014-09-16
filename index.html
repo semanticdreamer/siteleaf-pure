@@ -1,1 +1,27 @@
+{% capture body %}
+<h1>Hello World!!</h1>
+
+<p>Please add the following meta fields to your Siteleaf site, or remove them from the template:</p>
+
+<ol>
+  {% unless site.meta.subtitle %}<li>`subtitle` - sub title or claim of site</li>{% endunless %}
+  {% unless site.meta.shorttitle %}<li>`shorttitle` - shorter version of site title for side menu heading (one might even include html here, e.g. `<i class="fa fa-code"></i>`)</li>{% endunless %}
+  {% unless site.meta.description %}<li>`description` - site description for search engines</li>{% endunless %}
+  {% unless site.meta.author %}<li>`author` - site author for search engines</li>{% endunless %}
+  {% unless site.meta.keywords %}<li>`keywords` - site keywords for search engines</li>{% endunless %}
+  {% unless site.meta.copyright %}<li>`copyright` - Copyright claim for footer</li>{% endunless %}
+  {% unless site.meta.twitter %}<li>`twitter` - Twitter username for Twitter cards</li>{% endunless %}
+  {% unless site.meta.feed_url %}<li>`feed_url` - Feedburner feed URL (falls back to generated XML file)</li>{% endunless %}
+</ol>
+
+<p>Please add the following meta fields to your Siteleaf pages, or remove them from the template:</p>
+
+<ol>
+  <li>`subtitle` - page subtitle for layout and meta fields</li>
+</ol>
+
+<p>Then, remove this content from the `/default.html` file, start coding and relax!</p>
+
+{% endcapture %}
+
 {% include 'layouts/index' %}
