@@ -1,6 +1,6 @@
-# Siteleaf Pure Skeleton Theme
+# Siteleaf Pure Theme
 
-A [Pure][Pure] skeleton theme for the [Siteleaf][Siteleaf] content management system.
+A [Pure][Pure] theme for the [Siteleaf][Siteleaf] content management system.
 
 ## Status
 
@@ -14,9 +14,9 @@ Next up: add a `blog` tpl (for *writing*)... and propably an image `gallery` tpl
 
 ... where credit is due! 
 
-The approach for the skeleton (especially the use of [Guard][Guard] as well as the file and directory layout) was inspired by [Jonnie Hallman (@destroytoday)](https://github.com/destroytoday)'s [Skeleton theme for Siteleaf](https://github.com/destroytoday/siteleaf-skeleton).
+The skeleton approach for the template (e.g. the use of [Guard][Guard], the integrated documentation of required meta fields, as well as the file and directory layout) was inspired by [Jonnie Hallman (@destroytoday)](https://github.com/destroytoday)'s [Skeleton theme for Siteleaf](https://github.com/destroytoday/siteleaf-skeleton).
 
-## How to use this skeleton theme?
+## How to use this theme?
 
 ### Prerequisits
 
@@ -35,6 +35,22 @@ The approach for the skeleton (especially the use of [Guard][Guard] as well as t
 - Run `bundle exec guard` to watch/ livereload changes.
 - Run `bundle exec siteleaf server` in a new/ 2nd shell (or terminal tab) to preview your theme locally.
 - Open [0.0.0.0:9292](http://0.0.0.0:9292/) in your browser of choice.
+
+### Customization
+
+There are the following templates available:
+
+- `index` using Pure's [Side Menu](http://purecss.io/layouts/side-menu/) layout
+- `default` using Pure's [Landing Page (Marketing)](http://purecss.io/layouts/marketing/) layout
+
+In order to use the *Side Menu* layout also for the `index` page one need to edit the templates `index.html` file, by simply replacing... 
+
+    {% include 'layouts/index' %}
+    
+... with: 
+
+    {% include 'layouts/default' %}
+
 
 
 [Siteleaf]: http://www.siteleaf.com/ "Siteleaf"
