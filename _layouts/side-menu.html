@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+{% include 'includes/html_head_open' %}
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="/assets/css/layouts/side-menu-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="/assets/css/layouts/side-menu.css">
+    <!--<![endif]-->
+{% include 'includes/html_head_close' %}
+  <body class="{{ type }}">
+    <div id="layout">
+      <!-- Menu toggle -->
+       <a href="#menu" id="menuLink" class="menu-link" name="menuLink"><!-- Hamburger icon --><span></span></a>
+      <div id="menu">
+        <div class="pure-menu pure-menu-open">
+          <a class="pure-menu-heading" href="/" title="{{ site.domain }} - {{ site.meta.subtitle }}">
+            {{ site.meta.shorttitle }}
+          </a>
+          <ul>
+            {% for page in site.pages %}
+              <li{% if page.url == url %} class="menu-item-divided pure-menu-selected"{% endif %}><a href="{{page.url}}">{{page.title}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div> <!-- div#menu -->
+      <div id="main">
+        <div class="header">
+          <h1>{{ current.title }}</h1>
+          <h2>{{ current.meta.subtitle }}</h2>
+        </div> <!-- div.header -->
+        <div class="content">
+          {{ body }}
+        </div> <!-- div.content -->
+        <div class="footer l-box">
+          <div class="pure-g">
+              <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+                {% include 'includes/credits' %}
+              </div>
+              <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+                {% include 'includes/copyright' %}
+              </div>
+          </div>
+        </div><!-- div.footer -->
+      </div> <!-- div#main -->
+    </div> <!-- div#layout -->
+    <script src="/assets/js/layouts/side-menu-ui.js"></script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+  <head>
+    <meta charset="utf-8">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    
+    <title>{{ site.title }} - {{ current.title }}</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <meta name="description" content="{{ current.meta.description }}">
+    <meta name="keywords" content="{{ site.meta.keywords }}">
+    <meta name="author" content="{{ current.author.fullname | fallback: site.meta.author }}">
+    
+    <meta property="twitter:creator" content="{{ site.meta.twitter }}">
+    <meta property="twitter:title" content="{{ current.title }} {{ current.meta.subtitle }}">
+    <meta property="twitter:description" content="{{ current.meta.description }}">
+    
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png">
+
+    <link type="application/rss+xml" rel="alternate" title="{{ site.title }}" href="{{ site.meta.feed_url | fallback: site.feed_url }}">
+    
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css" type="text/css">
+    
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-old-ie-min.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/grids-responsive-min.css">
+    <!--<![endif]-->
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!--[if lt IE 9]>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <![endif]-->
+    

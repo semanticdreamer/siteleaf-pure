@@ -40,8 +40,9 @@ The skeleton approach for the template (e.g. the use of [Guard][Guard], the inte
 
 There are the following templates available:
 
-- `index` using Pure's [Side Menu](http://purecss.io/layouts/side-menu/) layout
-- `default` using Pure's [Landing Page (Marketing)](http://purecss.io/layouts/marketing/) layout
+- `index` using Pure's [Landing Page (Marketing)](http://purecss.io/layouts/marketing/) layout
+- `default` using Pure's [Side Menu](http://purecss.io/layouts/side-menu/) layout
+- `blog` and `writing` using Pure's [Blog](http://purecss.io/layouts/blog/) layout
 
 In order to use the *Side Menu* layout also for the `index` page one need to edit the templates `index.html` file, by simply replacing... 
 

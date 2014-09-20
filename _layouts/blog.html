@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+{% include 'includes/html_head_open' %}
+    <!--[if lte IE 8]>
+      <link rel="stylesheet" href="/assets/css/layouts/blog-old-ie.css">
+    <![endif]-->
+    <!--[if gt IE 8]><!-->
+      <link rel="stylesheet" href="/assets/css/layouts/blog.css">
+    <!--<![endif]-->
+{% include 'includes/html_head_close' %}
+  <body class="{{ type }}">
+    <div id="layout" class="pure-g">
+      <div class="sidebar pure-u-1 pure-u-md-1-4">
+        <div class="header">
+          <h1 class="brand-title">
+            {% if parent %}
+              {{ parent.title }}
+            {% else %}
+              {{ current.title }}
+            {% endif %}
+          </h1>
+          <h2 class="brand-tagline">
+            {% if parent %}
+              {{ parent.meta.subtitle }}
+            {% else %}
+              {{ current.meta.subtitle }}
+            {% endif %}
+          </h2>
+          
+          <nav class="nav">
+            <ul class="nav-list">
+              <li class="nav-item">
+                <a class="pure-button" href="/" title="{{ site.domain }} - {{ site.meta.subtitle }}">{{ site.title }}</a>
+              </li>
+            </ul>
+          </nav> <!-- nav.nav -->
+        </div> <!-- div.header -->
+      </div> <!-- div.sidebar -->
+      
+    <div class="content pure-u-1 pure-u-md-3-4">
+
+      {% if type == "post" %}
+      
+      <section class="post">
+        <header class="post-header">
+            <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
+        
+            <p class="post-meta">
+                <time datetime="{{ post.date }}"> {{ current.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                {% for tag in current.taxonomy['tags'] %}
+                  <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
+                {% endfor %}
+            </p>
+        </header>
+        
+        <div class="post-description">
+          {{ body }}
+        </div>
+      </section> <!-- section.post -->
+      
+      {% else %}
+      
+      <!-- A wrapper for all the featured posts -->
+      <div class="posts">
+        <h1 class="content-subhead">Featured Posts</h1>
+        
+        {% assign featured_ids = '' %}
+ 
+        {% for post in taxonomy['tags']['featured'].posts limit:4 %}
+        {% assign featured_ids = featured_ids | append:',' | append:post.id %}
+          <section class="post">
+            <header class="post-header">
+                <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
+            
+                <p class="post-meta">
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                    {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                    {% for tag in post.taxonomy['tags'] %}
+                      <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
+                    {% endfor %}
+                </p>
+            </header>
+            
+            <div class="post-description">
+              {{ post.body | strip_html | truncatewords: 100 }}
+              <p><a href="{{post.url}}">Read more &rarr;</a>
+            </div>
+          </section> <!-- section.post -->
+        {% endfor %}
+        
+      </div> <!-- div.posts -->
+      
+      <!-- A wrapper for all the blog posts -->
+      <div class="posts">
+        <h1 class="content-subhead">Recent Posts</h1>
+        
+        {% comment %} Loop through any posts and show an excerpt {% endcomment %}
+        {% for post in posts %}
+        {% unless featured_ids contains post.id %}
+          <section class="post">
+            <header class="post-header">
+                <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
+            
+                <p class="post-meta">
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                    {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                    {% for tag in post.taxonomy['tags'] %}
+                      <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
+                    {% endfor %}
+                </p>
+            </header>
+            
+            <div class="post-description">
+              {{ post.body | strip_html | truncatewords: 100 }}
+              <p><a href="{{post.url}}">Read more &rarr;</a>
+            </div>
+          </section> <!-- section.post -->
+        {% endunless %}
+        {% endfor %}
+        
+      </div> <!-- div.posts -->
+      
+      {% endif %}
+      
+      {% if parent %}
+        <p><a href="{{parent.url}}">&larr; Back to {{parent.title}}</a></p>
+      {% endif %}
+      
+      <div class="footer footer-blog">
+        <div class="pure-g">
+            <div class="l-box-lrg pure-u-1 pure-u-md-2-5">
+              {% include 'includes/credits' %}
+            </div>
+            <div class="l-box-lrg pure-u-1 pure-u-md-3-5">
+              {% include 'includes/copyright' %}
+            </div>
+        </div>
+      </div> <!-- div.footer -->
+    </div> <!-- div.content -->
+      
+    </div> <!-- div#layout -->
+  </body>
+</html>
