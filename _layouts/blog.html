@@ -13,14 +13,18 @@
       <div class="sidebar pure-u-1 pure-u-md-1-4">
         <div class="header">
           <h1 class="brand-title">
-            {% if parent %}
+            {% if type == "tag" %}
+              {{ parent.parent.title }}
+            {% elsif type == "post" or type == "archive" %}
               {{ parent.title }}
             {% else %}
               {{ current.title }}
             {% endif %}
           </h1>
           <h2 class="brand-tagline">
-            {% if parent %}
+            {% if type == "tag" %}
+              {{ parent.parent.meta.subtitle }}
+            {% elsif type == "post" or type == "archive" %}
               {{ parent.meta.subtitle }}
             {% else %}
               {{ current.meta.subtitle }}
@@ -38,6 +42,14 @@
       </div> <!-- div.sidebar -->
       
     <div class="content pure-u-1 pure-u-md-3-4">
+      
+      <nav>
+        {% if type == "tag" %}
+          <p><a href="{{ parent.parent.url }}" title="Back to {{ parent.parent.title }}">&larr; Back to {{ parent.parent.title }}</a></p>
+        {% elsif type == "post" or type == "archive" %}
+          <p><a href="{{ parent.url }}" title="Back to {{ parent.title }}">&larr; Back to {{ parent.title }}</a></p>
+        {% endif %}
+      </nav>
 
       {% if type == "post" %}
       
@@ -47,7 +59,7 @@
             <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
         
             <p class="post-meta">
-                <time datetime="{{ post.date }}"> {{ current.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                <time datetime="{{ current.date }}"> {{ current.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ current.author.fullname }}</span> under 
                 {% comment %} Show tags associated with a taxonomy {% endcomment %}
                 {% for tag in current.taxonomy['tags'] %}
                   <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
@@ -60,24 +72,39 @@
         </div>
       </section> <!-- section.post -->
       
+      <nav>
+          <div class="pure-g">
+              <div class="l-box-lrg pure-u-1 pure-u-md-1-2">
+                {% if previous and previous.type == "post" %}
+                  <p><a href="{{ previous.url }}"> &larr; {{ previous.title }}</a></p>
+                {% endif %}
+              </div>
+              <div class="l-box-lrg pure-u-1 pure-u-md-1-2">
+                {% if next and next.type == "post" %}
+                  <p><a href="{{ next.url }}">{{ next.title }} &rarr;</a></p>
+                {% endif %}
+              </div>
+          </div>
+      </nav>
+      
       {% else %}
       
-      <!-- A wrapper for all the featured posts -->
+      <!-- A wrapper for the featured post (if any) -->
       {% if taxonomy['tags']['featured'].posts %}
       <div class="posts">
         <h1 class="content-subhead">Featured Writing</h1>
         
         {% assign featured_ids = '' %}
  
-        {% for post in taxonomy['tags']['featured'].posts limit:4 %}
+        {% for post in taxonomy['tags']['featured'].posts limit:1 %}
         {% assign featured_ids = featured_ids | append:',' | append:post.id %}
           <section class="post">
             <header class="post-header">
-                <img class="post-avatar" alt="{{ author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ author.avatar }}">
+                <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
                 <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
             
                 <p class="post-meta">
-                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
                     {% comment %} Show tags associated with a taxonomy {% endcomment %}
                     {% for tag in post.taxonomy['tags'] %}
                       <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
@@ -95,20 +122,26 @@
       </div> <!-- div.posts -->
       {% endif %}
       
-      <!-- A wrapper for all the blog posts -->
+      <!-- A wrapper for either the most recent blog posts or all blog posts (=archive) -->
       <div class="posts">
-        <h1 class="content-subhead">Recent Writing</h1>
+        <h1 class="content-subhead">
+          {% if type == "archive" %}
+            Archive
+          {% else %}
+            Recent Writing
+          {% endif %}
+        </h1>
         
         {% comment %} Loop through any posts and show an excerpt {% endcomment %}
-        {% for post in posts %}
+        {% for post in posts limit:4 %}
         {% unless featured_ids contains post.id %}
           <section class="post">
             <header class="post-header">
-                <img class="post-avatar" alt="{{ author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ author.avatar }}">
+                <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
                 <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
             
                 <p class="post-meta">
-                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ author.fullname }}</span> under 
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
                     {% comment %} Show tags associated with a taxonomy {% endcomment %}
                     {% for tag in post.taxonomy['tags'] %}
                       <a class="post-category post-category-pure" href="{{ tag.url }}">{{ tag.value }}</a>
@@ -126,10 +159,12 @@
         
       </div> <!-- div.posts -->
       
-      {% endif %}
+      <nav>
+        {% if type != "archive" %}
+          <p><a href="{{ archive_url }}">Archive &rarr;</a></p>
+        {% endif %}
+      </nav>
       
-      {% if parent %}
-        <p><a href="{{parent.url}}">&larr; Back to {{parent.title}}</a></p>
       {% endif %}
       
       <div class="footer footer-blog">

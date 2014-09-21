@@ -52,6 +52,10 @@ In order to use the *Side Menu* layout also for the `index` page one need to edi
 
     {% include 'layouts/default' %}
 
+### Resources
+
+- [Siteleaf Theme Documentation](http://www.siteleaf.com/help/themes/)
+- [Liquid for Designers](https://github.com/Shopify/liquid/wiki/Liquid-for-Designers)
 
 
 [Siteleaf]: http://www.siteleaf.com/ "Siteleaf"
