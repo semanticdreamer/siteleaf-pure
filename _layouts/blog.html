@@ -43,6 +43,7 @@
       
       <section class="post">
         <header class="post-header">
+            <img class="post-avatar" alt="{{ author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ author.avatar }}">
             <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
         
             <p class="post-meta">
@@ -62,6 +63,7 @@
       {% else %}
       
       <!-- A wrapper for all the featured posts -->
+      {% if taxonomy['tags']['featured'].posts %}
       <div class="posts">
         <h1 class="content-subhead">Featured Writing</h1>
         
@@ -71,6 +73,7 @@
         {% assign featured_ids = featured_ids | append:',' | append:post.id %}
           <section class="post">
             <header class="post-header">
+                <img class="post-avatar" alt="{{ author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ author.avatar }}">
                 <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
             
                 <p class="post-meta">
@@ -90,6 +93,7 @@
         {% endfor %}
         
       </div> <!-- div.posts -->
+      {% endif %}
       
       <!-- A wrapper for all the blog posts -->
       <div class="posts">
@@ -100,6 +104,7 @@
         {% unless featured_ids contains post.id %}
           <section class="post">
             <header class="post-header">
+                <img class="post-avatar" alt="{{ author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ author.avatar }}">
                 <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
             
                 <p class="post-meta">
