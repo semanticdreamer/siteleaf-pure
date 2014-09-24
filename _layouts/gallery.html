@@ -18,13 +18,26 @@
     <div>
       <div class="header">
         <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <a class="pure-menu-heading" href="/" title="{{ site.domain }}">{{ site.title }}</a>
+          <a class="pure-menu-heading" href="/" title="{{ site.domain }}">
+            {% if site.meta.logo_url %}
+              <img src="{{ site.meta.logo_url }}" alt="{{ site.title }}">
+            {% else %}
+              {{ site.title }}
+            {% endif %}
+          </a>
           <ul>
             {% for page in site.pages %}
-              <li><a href="{{page.url}}"{% if page.url == url %} class="pure-menu-selected"{% endif %}>{{ page.title }}</a></li>
+            {% unless page.url == '/' %}
+              <li{% if page.url == url %} class="pure-menu-selected"{% endif %}><a href="{{page.url}}">{{ page.title }}</a></li>
+            {% endunless %}
             {% endfor %}
-            {% for page in pages %}
-              <li><a href="{{page.url}}"{% if page.url == url %} class="pure-menu-selected"{% endif %}>{{ page.title }}</a></li>
+          </ul>
+        </div>
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul>
+            {% comment %} Show subpages if there are any available {% endcomment %}
+            {% for subpage in pages %}
+              <li><a href="{{subpage.url}}">{{ subpage.title }}</a></li>
             {% endfor %}
           </ul>
         </div>
