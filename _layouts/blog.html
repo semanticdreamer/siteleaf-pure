@@ -59,11 +59,11 @@
             <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
         
             <p class="post-meta">
-                <time datetime="{{ current.date }}"> {{ current.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ current.author.fullname }}</span> under 
-                {% comment %} Show tags associated with a taxonomy {% endcomment %}
-                {% for tag in current.taxonomy['tags'] %}
-                  <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
-                {% endfor %}
+              <time datetime="{{ current.date }}"> {{ current.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ current.author.fullname }}</span> under 
+              {% comment %} Show tags associated with a taxonomy {% endcomment %}
+              {% for tag in current.taxonomy['tags'] %}
+                <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
+              {% endfor %}
             </p>
         </header>
         
@@ -100,16 +100,16 @@
             {% assign featured_ids = featured_ids | append:',' | append:post.id %}
               <section class="post">
                 <header class="post-header">
-                    <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
-                    <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
-                
-                    <p class="post-meta">
-                        <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
-                        {% comment %} Show tags associated with a taxonomy {% endcomment %}
-                        {% for tag in post.taxonomy['tags'] %}
-                          <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
-                        {% endfor %}
-                    </p>
+                  <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
+                  <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
+                  
+                  <p class="post-meta">
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
+                      {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                      {% for tag in post.taxonomy['tags'] %}
+                        <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
+                      {% endfor %}
+                  </p>
                 </header>
                 
                 <div class="post-description">
@@ -134,16 +134,16 @@
             {% unless featured_ids contains post.id %}
               <section class="post">
                 <header class="post-header">
-                    <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
-                    <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
-                
-                    <p class="post-meta">
-                        <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
-                        {% comment %} Show tags associated with a taxonomy {% endcomment %}
-                        {% for tag in post.taxonomy['tags'] %}
-                          <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
-                        {% endfor %}
-                    </p>
+                  <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
+                  <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
+                  
+                  <p class="post-meta">
+                    <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
+                    {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                    {% for tag in post.taxonomy['tags'] %}
+                      <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
+                    {% endfor %}
+                  </p>
                 </header>
                 
                 <div class="post-description">
