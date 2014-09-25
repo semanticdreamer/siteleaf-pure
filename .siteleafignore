@@ -2,6 +2,6 @@
 config.ru
 Gemfile*
 Guardfile
-LICENSE
+*LICENSE
 README.md
 downloads/*.*
