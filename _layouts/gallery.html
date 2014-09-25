@@ -52,7 +52,7 @@
         {% assign asset_ids = asset_ids | append:',' | append:asset.id %}
           {% if asset.type == 'image' %}
           <a href="{{ asset.url }}" data-lightbox="gallery"{% if asset.meta.alt %} data-title="{{ asset.meta.alt }}"{% endif %}>
-            <div class="photo-box u-1 u-med-1-3 u-lrg-1-4" style="background-size: cover; background-position: center center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
+            <div class="photo-box u-1 u-med-1-3 u-lrg-1-4" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
               {% if asset.meta.caption %}
               <aside class="photo-box-caption">
                 <span>
@@ -76,7 +76,7 @@
         {% unless asset_ids contains asset.id %}
           {% if asset.type == 'image' %}
           <a href="{{ asset.url }}" data-lightbox="gallery"{% if asset.meta.alt %} data-title="{{ asset.meta.alt }}"{% endif %}>
-            <div class="photo-box u-1 u-med-1-2 u-lrg-1-3" style="background-size: cover; background-position: center center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
+            <div class="photo-box u-1 u-med-1-2 u-lrg-1-3" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
               {% if asset.meta.caption %}
               <aside class="photo-box-caption">
                 <span>

@@ -15,6 +15,13 @@
     background: none;
 }
 
+.footer-blog a {
+    background: none;
+    font-size: 100%;
+    color: inherit;
+    text-decoration: underline;
+}
+
 .legal {
     line-height: 1.6;
     text-align: center;

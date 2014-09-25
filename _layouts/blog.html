@@ -7,11 +7,41 @@
     <!--[if gt IE 8]><!-->
       <link rel="stylesheet" href="/assets/css/layouts/blog.css">
     <!--<![endif]-->
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Bitter:400' rel='stylesheet' type='text/css'>
+    <style>
+      html, body, button, input, select, textarea,
+      .pure-g [class *= "pure-u"], .post-description {
+        font-family: 'Bitter', serif;
+      }
+      .sidebar {
+        background: none repeat scroll 0 0 rgb(61, 79, 93);
+        background-size: cover;
+        background-position: center; 
+        background-repeat: no-repeat; 
+        background-image: url('{{ site.meta.sidebar_logo_url }}');
+        color: #fff;
+      }
+      .brand-title, .brand-tagline, .header nav {
+      	/* Fallback for web browsers that doesn't support RGBa */
+      	background: rgb(61, 79, 93);
+      	/* RGBa with 0.6 opacity */
+      	background: rgba(61, 79, 93, 0.7);
+        padding: 10px;
+      }
+      .nav-item a.pure-button-active {
+        background-color: rgb(176, 202, 219);
+      }
+    </style>
 {% include 'includes/html_head_close' %}
   <body class="{{ type }}">
     <div id="layout" class="pure-g">
       <div class="sidebar pure-u-1 pure-u-md-1-4">
         <div class="header">
+          <h1 class="brand-title">
+            {{ site.meta.shorttitle }}
+          </h1>
+          {% comment %}
           <h1 class="brand-title">
             {% if type == "tag" %}
               {{ parent.parent.title }}
@@ -21,6 +51,7 @@
               {{ current.title }}
             {% endif %}
           </h1>
+          {% endcomment %}
           <h2 class="brand-tagline">
             {% if type == "tag" %}
               {{ parent.parent.meta.subtitle }}
@@ -34,7 +65,7 @@
           <nav class="nav">
             <ul class="nav-list">
               {% for page in site.pages %}
-                <li class="nav-item"><a class="pure-button{% if page.url == url %} pure-button-disabled {% endif %}" href="{{page.url}}">{{page.title}}</a></li>
+                <li class="nav-item"><a class="pure-button{% if page.url == url %} pure-button-active{% endif %}" href="{{page.url}}" title="{{ page.title }}">{{ page.title }}</a></li>
               {% endfor %}
             </ul>
           </nav> <!-- nav.nav -->
@@ -162,9 +193,9 @@
       
       {% if type == "page" %}
         <section class="post">
-          <!-- <header class="post-header">
+          <header class="post-header">
               <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
-          </header> -->
+          </header>
           
           <div class="post-description">
             {{ body }}
