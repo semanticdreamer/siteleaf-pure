@@ -185,55 +185,52 @@
             {% endunless %}
             {% endfor %}
             
-          </div> <!-- div.posts -->
+          </div> <!-- div.posts -->      
+        {% else %}
+          <section class="post">
+            <header class="post-header">
+                <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
+            </header>
+            
+            <div class="post-description">
+              {{ body }}
+            </div>
+          </section> <!-- section.post -->
         {% endif %}
-      
-      {% endif %}
-      
-      
-      {% if type == "page" %}
-        <section class="post">
-          <header class="post-header">
-              <h2 class="post-title"><a href="{{current.url}}">{{ current.title }}</a></h2>
-          </header>
-          
-          <div class="post-description">
-            {{ body }}
-          </div>
-        </section> <!-- section.post -->
-      {% endif %}
-      
-      {% if home? %}
-      
-        <div class="posts">
-          <h1 class="content-subhead">
-            Recent Writing
-          </h1>
-          
-          {% comment %} Loop through any posts and show an excerpt {% endcomment %}
-          {% for post in site.posts limit:3 %}
-            <section class="post">
-              <header class="post-header">
-                  <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
-                  <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
-              
-                  <p class="post-meta">
-                      <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
-                      {% comment %} Show tags associated with a taxonomy {% endcomment %}
-                      {% for tag in post.taxonomy['tags'] %}
-                        <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
-                      {% endfor %}
-                  </p>
-              </header>
-              
-              <div class="post-description">
-                {{ post.body | strip_html | truncatewords: 100 }}
-                <p><a href="{{post.url}}">Read more &rarr;</a>
-              </div>
-            </section> <!-- section.post -->
-          {% endfor %}
-          
-        </div> <!-- div.posts -->
+        
+        {% if home? %}
+        
+          <div class="posts">
+            <h1 class="content-subhead">
+              Recent Writing
+            </h1>
+            
+            {% comment %} Loop through any posts and show an excerpt {% endcomment %}
+            {% for post in site.posts limit:3 %}
+              <section class="post">
+                <header class="post-header">
+                    <img class="post-avatar" alt="{{ post.author.fullname }}&#x27;s avatar" height="48" width="48" src="{{ post.author.avatar }}">
+                    <h2 class="post-title"><a href="{{post.url}}">{{ post.title }}</a></h2>
+                
+                    <p class="post-meta">
+                        <time datetime="{{ post.date }}"> {{ post.date | date: "%-d %B %Y" }}</time> by <span class="post-author">{{ post.author.fullname }}</span> under 
+                        {% comment %} Show tags associated with a taxonomy {% endcomment %}
+                        {% for tag in post.taxonomy['tags'] %}
+                          <a class="post-category" href="{{ tag.url }}">{{ tag.value }}</a>
+                        {% endfor %}
+                    </p>
+                </header>
+                
+                <div class="post-description">
+                  {{ post.body | strip_html | truncatewords: 100 }}
+                  <p><a href="{{post.url}}">Read more &rarr;</a>
+                </div>
+              </section> <!-- section.post -->
+            {% endfor %}
+            
+          </div> <!-- div.posts -->
+        
+        {% endif %}
       
       {% endif %}
       
