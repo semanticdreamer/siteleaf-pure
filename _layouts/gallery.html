@@ -13,7 +13,7 @@
     <!--[if gt IE 8]><!-->
       <link rel="stylesheet" href="/assets/css/layouts/gallery.css">
     <!--<![endif]-->
-    <link href="/assets/css/lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/assets/css/vendor/strip/strip.css"/>
 {% include 'includes/html_head_close' %}
   <body class="{{ type }}">
     <div>
@@ -51,7 +51,7 @@
         {% for asset in assets limit:1 %}
         {% assign asset_ids = asset_ids | append:',' | append:asset.id %}
           {% if asset.type == 'image' %}
-          <a href="{{ asset.url }}" data-lightbox="gallery"{% if asset.meta.alt %} data-title="{{ asset.meta.alt }}"{% endif %}>
+          <a href="{{ asset.url }}" class="strip" data-strip-group="gallery"{% if asset.meta.alt %} data-strip-caption="{{ asset.meta.alt }}"{% endif %}>
             <div class="photo-box u-1 u-med-1-3 u-lrg-1-4" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
               {% if asset.meta.caption %}
               <aside class="photo-box-caption">
@@ -75,7 +75,7 @@
         {% for asset in assets %}
         {% unless asset_ids contains asset.id %}
           {% if asset.type == 'image' %}
-          <a href="{{ asset.url }}" data-lightbox="gallery"{% if asset.meta.alt %} data-title="{{ asset.meta.alt }}"{% endif %}>
+          <a href="{{ asset.url }}" class="strip" data-strip-group="gallery"{% if asset.meta.alt %} data-strip-caption="{{ asset.meta.alt }}"{% endif %}>
             <div class="photo-box u-1 u-med-1-2 u-lrg-1-3" style="background-size: cover; background-position: center; background-repeat: no-repeat; background-image: url('{{ asset.url }}');">
               {% if asset.meta.caption %}
               <aside class="photo-box-caption">
@@ -120,6 +120,6 @@
       document.write('<script src="/assets/js/vendor/jquery/2.1.1/jquery.min.js"><\/script>');
     }
     </script>
-    <script src="/assets/js/lightbox.min.js"></script>
+    <script src="/assets/js/vendor/strip/strip.min.js"></script>
   </body>
 </html>
